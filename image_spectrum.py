@@ -1,0 +1,1 @@
+print("Imagine a spectrum")
