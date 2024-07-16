@@ -9,7 +9,7 @@ tasks:
 
 3. write function that performs barycentric correction for all spectral orders - nina
 
-   a. input(wavelength, flux, date/time)
+   a. input(wavelength, flux, date/time, BERV from fits header)
 
    b. output(wavelength, flux)
 
