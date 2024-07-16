@@ -1,9 +1,9 @@
-analyze spectra!
+# analyze spectra!
 
-## write function that performs barycentric correction for all spectral orders
+1. write function that performs barycentric correction for all spectral orders
 
-## write function that does the continuum normalization correction
+2. write function that does the continuum normalization correction
 
-## write function that computes weighted daily average
+3. write function that computes weighted daily average
 
-## write a simple plotting function
+4. write a simple plotting function
