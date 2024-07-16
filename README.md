@@ -9,10 +9,14 @@ tasks:
 
 3. write function that performs barycentric correction for all spectral orders - nina
 
-4. Wavelength interpolation function - kate
+   a. input(wavelength, flux, date/time)
+
+   b. output(wavelength, flux)
+
+5. Wavelength interpolation function - kate
 
    a. input(template, flux)
 
-5. write function that computes weighted daily average - kate
+6. write function that computes weighted daily average - kate
 
-6. write a simple plotting function - all
+7. write a simple plotting function - all
