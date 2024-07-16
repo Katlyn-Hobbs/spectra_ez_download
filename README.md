@@ -7,6 +7,8 @@ tasks:
 
 3. Wavelength interpolation function - kate
 
-4. write function that computes weighted daily average - kate
+   a. input(template, flux)
 
-5. write a simple plotting function - all
+5. write function that computes weighted daily average - kate
+
+6. write a simple plotting function - all
