@@ -1,1 +1,0 @@
-print("Imagine a spectrum")
