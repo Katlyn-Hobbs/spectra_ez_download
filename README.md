@@ -1,11 +1,13 @@
 # analyze spectra!
 
-1. write function that performs barycentric correction for all spectral orders
+tasks:
 
-2. Wavelength interpolation function
+1. write function that performs barycentric correction for all spectral orders - nina
 
-3. write function that does the continuum normalization correction
+2. Wavelength interpolation function - kate
 
-4. write function that computes weighted daily average
+3. write function that does the continuum normalization correction - zoe
 
-5. write a simple plotting function
+4. write function that computes weighted daily average - kate
+
+5. write a simple plotting function - all
