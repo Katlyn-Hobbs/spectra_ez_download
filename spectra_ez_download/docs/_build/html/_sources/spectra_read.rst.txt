@@ -1,9 +1,0 @@
-.. _correlation:
-
-Spectra Read
-=====================
-
-Function to read in spectra.
-
-.. automodule:: spectra_read
-   :members:
