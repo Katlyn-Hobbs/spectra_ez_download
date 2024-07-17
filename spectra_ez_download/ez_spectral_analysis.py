@@ -4,6 +4,20 @@ import pandas as pd
 import matplotlib.pylab as plt
 
 def spectra_read(path, flux_col = 1, wl_col = 4):
+    """
+    Read spectra
+
+    Open fits files and return the wavelength and spectra for each wavelength order.
+
+    Args:
+        path (str): string. Specified path of where a spectrum is located
+        flux_col (int): interger. The fits data column where the fluxes is stored
+        wl_col (int): integer. The fits data column where the wavelengths is stored
+
+    Returns:
+        arrays: wavelength array, flux array
+
+    """
 
     hdul = fits.open(path)
     flux_data = hdul[flux_col].data
