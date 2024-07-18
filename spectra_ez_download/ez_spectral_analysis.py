@@ -43,10 +43,11 @@ class ez_spectral_analysis(object):
         """
     
         if self.instrument =='HARPS-N':
-          self.flux_col = 1, self.wl_col = 4
+          self.flux_col = 1
+          self.wl_col = 4
           hdul = fits.open(self.path)
-          flux_data = hdul[flux_col].data
-          wavelength_data = hdul[wl_col].data
+          flux_data = hdul[self.flux_col].data
+          wavelength_data = hdul[self.wl_col].data
           return wavelength_data, flux_data
         else:
            print("Error: "+self.instrument+" is currently not supported by spectra_ez_download. Please submit an issue on github.")
