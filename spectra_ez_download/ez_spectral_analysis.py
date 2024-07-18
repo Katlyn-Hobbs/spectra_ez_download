@@ -9,7 +9,7 @@ from specutils.fitting import fit_generic_continuum
 from astropy import units as u
 from astropy.modeling import models
 
-def spectra_read(path, flux_col = 1, wl_col = 4):
+def spectra_read(path, instrument):
     """
     Read spectra
 
@@ -17,19 +17,23 @@ def spectra_read(path, flux_col = 1, wl_col = 4):
 
     Args:
         path (str): string. Specified path of where a spectrum is located
-        flux_col (int): interger. The fits data column where the fluxes is stored
-        wl_col (int): integer. The fits data column where the wavelengths is stored
+        instrument (str): String that specifies the instrument. Currently, the only supported instrumented is 'HARPS-N'.
 
     Returns:
         arrays: wavelength array, flux array
 
     """
 
-    hdul = fits.open(path)
-    flux_data = hdul[flux_col].data
-    wavelength_data = hdul[wl_col].data
-    
-    return wavelength_data, flux_data
+    if instrument =='HARPS-N':
+      flux_col = 1, wl_col = 4
+      hdul = fits.open(path)
+      flux_data = hdul[flux_col].data
+      wavelength_data = hdul[wl_col].data
+      return wavelength_data, flux_data
+    else:
+       print("Error: "+instrument+" is currently not supported by spectra_ez_download. Please submit an issue on github.")
+
+
 
 
 def plot_raw_data(path, orders=[16, 17, 18]):
