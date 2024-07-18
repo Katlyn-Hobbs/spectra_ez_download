@@ -17,28 +17,26 @@ class ez_spectra_analysis(object):
     Completes simple spectral analysis for user-uploaded solar spectra of HARPS-N.
 
     Args:
-        path: path to local data
+        path (str): path to local data
+        instrument (str): specifies the instrument used. Currently, the only supported instrumented is 'HARPS-N'.   
         orders (list, optional): list of orders to be inspected. Default is [16, 17, 18]. Beware of noisy orders and tellurics.
         plot (bool, optional): produce plots from analysis. 
+        median_window (int, optional): integer. Needs to be an odd integer. The width of the median smoothing kernel used to filter the data before fitting the continuum. 
+        
     """
 
     def __init__(self, path, instrument, orders = [16, 17, 18], plot = False, median_window = 3):
         self.path = path
+        self.instrument = instrument
         self.orders = orders
         self.plot = plot
-        self.instrument = instrument
         self.median_window = median_window
         
         
     def spectra_read(self):
         """
         Read spectra
-    
         Open fits files and return the wavelength and spectra for each wavelength order.
-    
-        Args:
-            path (str): string. Specified path of where a spectrum is located
-            instrument (str): String that specifies the instrument. Currently, the only supported instrumented is 'HARPS-N'.
     
         Returns:
             arrays: wavelength array, flux array
@@ -74,15 +72,9 @@ class ez_spectra_analysis(object):
       """
       normalize the continuum of spectra
     
-        Opens fits files, cycles through each wavelength order (or the user-specified orders) and normalizes the continuum using specutils
+      Opens fits files, cycles through each wavelength order (or the user-specified orders) and normalizes the continuum using specutils
     
-        Args:
-            path (str): string. Specified path of where a spectrum is located
-            plot (bool): boolean. If True, plots will be generated. Default is False
-            orders (array): array. array of wavelength orders to be normalized. If not specified, all wavelength orders will be used.
-            median_window (int): integer. Needs to be an odd integer. The width of the median smoothing kernel used to filter the data before fitting the continuum.
-    
-        Returns:
+      Returns:
             arrays: wavelength array, normalized flux array
       """
     
