@@ -1,7 +1,7 @@
 # analyze spectra!
 
 tasks:
-1. write function that does the continuum normalization correction - zoe
+1. write function that does the continuum normalization correction - zoe [DONE]
    
    a. input (filepath, wavelength_for_all_orders, flux_for_all_orders)
    
