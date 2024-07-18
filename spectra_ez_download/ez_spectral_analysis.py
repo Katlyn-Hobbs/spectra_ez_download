@@ -158,6 +158,16 @@ class ez_spectra_analysis(object):
         return wavelength_corrected, flux
 
     def interpolation(self, template):   
+        """
+        Apply a spline interpolation.
+            Perform and apply a spline interpolation to shift each spectrum to a common wavelength grid, determined by the input template wavelength grid from a .fits file. 
+    
+          Args:
+              template (.fits file): Path to .fits file that will be used as the template wavelength grid for interpolation. 
+    
+          Returns:
+              arrays: wavelengths, interpolated flux
+        """
         berv_wl, berv_flux = ez_spectra_analysis.BC_correction()
         hdul = fits.open(template)
 
@@ -167,7 +177,7 @@ class ez_spectra_analysis(object):
             spline_coeff = interpolate.splrep(berv_wl[order], berv_flux[order])
             flux_interp_segment.append(interpolate.splev(wavelength_template[order], spline_coeff))
     
-        return berv_wl, flux_interp_segment
+        return wavelength_template, flux_interpolated
              
     
           
