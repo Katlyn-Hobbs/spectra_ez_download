@@ -12,7 +12,7 @@ from astropy.modeling import models
 from scipy.interpolate import interp1d
 from scipy import interpolate
 
-class ez_spectra_analysis(object):
+class ez_spectral_analysis(object):
     """
     Completes simple spectral analysis for user-uploaded solar spectra of HARPS-N.
 
@@ -52,6 +52,12 @@ class ez_spectra_analysis(object):
            print("Error: "+self.instrument+" is currently not supported by spectra_ez_download. Please submit an issue on github.")
 
     def plot_raw_data(self):
+        """
+        plot the raw spectra
+
+        Create a figure for the raw spectra for the specified wavelength orders. If orders are not specified, 
+        the default behavior is to plot orders 16, 17, 18.
+        """
         wavelengths, fluxes = ez_spectral_analysis.spectra_read()
     
         fig, axes = plt.subplots(len(self.orders), 1,figsize=(9, len(self.orders)*2))
@@ -168,14 +174,14 @@ class ez_spectra_analysis(object):
           Returns:
               arrays: wavelengths, interpolated flux
         """
-        berv_wl, berv_flux = ez_spectra_analysis.BC_correction()
+        berv_wl, berv_flux = ez_spectral_analysis.BC_correction()
         hdul = fits.open(template)
 
         wavelength_template = hdul[self.wl_col].data
-        flux_interp_segment = []
+        flux_interpolated = []
         for order in range(len(berv_wl)):
             spline_coeff = interpolate.splrep(berv_wl[order], berv_flux[order])
-            flux_interp_segment.append(interpolate.splev(wavelength_template[order], spline_coeff))
+            flux_interpolated.append(interpolate.splev(wavelength_template[order], spline_coeff))
     
         return wavelength_template, flux_interpolated
              
