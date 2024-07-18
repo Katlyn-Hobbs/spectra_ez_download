@@ -85,11 +85,14 @@ def continuum_norm(path, plot=False, median_window=3, orders=None):
         ax = axes[0]  
         ax.plot(wavelengths[order]/10*u.nm, fluxes[order]*u.Jy, color='purple')  
         ax.plot(wavelengths[order]/10*u.nm, y_continuum_fitted)  
+        ax.set_ylabel('Flux')  
         ax.set_title("Continuum Fitting")
 
         ax = axes[1]
         ax.plot(spec_normalized.spectral_axis, spec_normalized.flux, color='purple')    
         ax.set_title("Continuum normalized spectrum")
+        ax.set_ylabel('Normalized flux')  
+        ax.set_xlabel('Wavelengths (nm)')  
         f.tight_layout 
   else:
     for order in orders:
@@ -106,11 +109,14 @@ def continuum_norm(path, plot=False, median_window=3, orders=None):
         f, axes = plt.subplots(2, 1, figsize=(12, 4))
         ax = axes[0]  
         ax.plot(wavelengths[order]/10*u.nm, fluxes[order]*u.Jy, color='purple')  
-        ax.plot(wavelengths[order]/10*u.nm, y_continuum_fitted)  
+        ax.plot(wavelengths[order]/10*u.nm, y_continuum_fitted)
+        ax.set_ylabel('Flux')   
         ax.set_title("Continuum Fitting")
 
         ax = axes[1]
-        ax.plot(spec_normalized.spectral_axis, spec_normalized.flux, color='purple')    
+        ax.plot(spec_normalized.spectral_axis, spec_normalized.flux, color='purple')
+        ax.set_xlabel('Wavelengths (nm)')
+        ax.set_ylabel('Normalized flux')        
         ax.set_title("Continuum normalized spectrum")
         f.tight_layout    
 
