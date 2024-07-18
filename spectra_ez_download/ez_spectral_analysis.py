@@ -7,6 +7,7 @@ import matplotlib.pylab as plt
 from specutils.spectra import Spectrum1D, SpectralRegion
 from specutils.fitting import fit_generic_continuum
 from astropy import units as u
+from astropy.modeling import models
 
 def spectra_read(path, flux_col = 1, wl_col = 4):
     """
@@ -72,7 +73,8 @@ def continuum_norm(path, plot=False, median_window=3, orders=None):
     for order in range(0, len(fluxes)):
       spectrum = Spectrum1D(flux=fluxes[order].astype(np.float64)*u.Jy, 
                             spectral_axis=wavelengths[order].astype(np.float64)/10*u.nm)
-      continuum_g_x = fit_generic_continuum(spectrum, median_window=median_window)
+      continuum_g_x = fit_generic_continuum(spectrum, median_window=median_window, 
+                                            model=models.Chebyshev1D(4, c0=0., c1=0., c2=0., c3=0.))
       y_continuum_fitted = continuum_g_x(wavelengths[order]/10*u.nm)
 
       spec_normalized = spectrum / y_continuum_fitted
@@ -88,11 +90,13 @@ def continuum_norm(path, plot=False, median_window=3, orders=None):
         ax = axes[1]
         ax.plot(spec_normalized.spectral_axis, spec_normalized.flux, color='purple')    
         ax.set_title("Continuum normalized spectrum")
+        f.tight_layout 
   else:
     for order in orders:
       spectrum = Spectrum1D(flux=fluxes[order].astype(np.float64)*u.Jy, 
                             spectral_axis=wavelengths[order].astype(np.float64)/10*u.nm)
-      continuum_g_x = fit_generic_continuum(spectrum, median_window=median_window)
+      continuum_g_x = fit_generic_continuum(spectrum, median_window=median_window, 
+                                            model=models.Chebyshev1D(4, c0=0., c1=0., c2=0., c3=0.))
       y_continuum_fitted = continuum_g_x(wavelengths[order]/10*u.nm)
 
       spec_normalized = spectrum / y_continuum_fitted
@@ -107,7 +111,8 @@ def continuum_norm(path, plot=False, median_window=3, orders=None):
 
         ax = axes[1]
         ax.plot(spec_normalized.spectral_axis, spec_normalized.flux, color='purple')    
-        ax.set_title("Continuum normalized spectrum")    
+        ax.set_title("Continuum normalized spectrum")
+        f.tight_layout    
 
   return wavelengths.astype(np.float64), norm_fluxes        
          
