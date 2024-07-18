@@ -3,6 +3,11 @@ from astropy.io import fits
 import pandas as pd
 import matplotlib.pylab as plt
 
+# new packages. needs to be added to requirements and readthedocs.yaml
+from specutils.spectra import Spectrum1D, SpectralRegion
+from specutils.fitting import fit_generic_continuum
+from astropy import units as u
+
 def spectra_read(path, flux_col = 1, wl_col = 4):
     """
     Read spectra
@@ -41,6 +46,75 @@ def plot_raw_data(path, orders=[16, 17, 18]):
     ax.set_xlabel(r"Wavelength ($\AA$)")
     plt.tight_layout()
     plt.show()
+
+
+def continuum_norm(path, plot=False, median_window=3, orders=None):
+  """
+  normalize the continuum of spectra
+
+    Opens fits files, cycles through each wavelength order (or the user-specified orders) and normalizes the continuum using specutils
+
+    Args:
+        path (str): string. Specified path of where a spectrum is located
+        plot (bool): boolean. If True, plots will be generated. Default is False
+        orders (array): array. array of wavelength orders to be normalized. If not specified, all wavelength orders will be used.
+        median_window (int): integer. Needs to be an odd integer. The width of the median smoothing kernel used to filter the data before fitting the continuum.
+
+    Returns:
+        arrays: wavelength array, normalized flux array
+  """
+
+  wavelengths, fluxes =spectra_read(path=path)
+
+  norm_fluxes = []
+  
+  if orders == None:
+    for order in range(0, len(fluxes)):
+      spectrum = Spectrum1D(flux=fluxes[order].astype(np.float64)*u.Jy, 
+                            spectral_axis=wavelengths[order].astype(np.float64)/10*u.nm)
+      continuum_g_x = fit_generic_continuum(spectrum, median_window=median_window)
+      y_continuum_fitted = continuum_g_x(wavelengths[order]/10*u.nm)
+
+      spec_normalized = spectrum / y_continuum_fitted
+      norm_fluxes.append(spec_normalized.flux)
+
+      if plot:
+        f, axes = plt.subplots(1, 2, figsize=(12, 4))
+        ax = axes[0]  
+        ax.plot(wavelengths[order]/10*u.nm, fluxes[order]*u.Jy, color='purple')  
+        ax.plot(wavelengths[order]/10*u.nm, y_continuum_fitted)  
+        ax.set_title("Continuum Fitting")
+
+        ax = axes[1]
+        ax.plot(spec_normalized.spectral_axis, spec_normalized.flux, color='purple')    
+        ax.set_title("Continuum normalized spectrum")
+  else:
+    for order in orders:
+      spectrum = Spectrum1D(flux=fluxes[order].astype(np.float64)*u.Jy, 
+                            spectral_axis=wavelengths[order].astype(np.float64)/10*u.nm)
+      continuum_g_x = fit_generic_continuum(spectrum, median_window=median_window)
+      y_continuum_fitted = continuum_g_x(wavelengths[order]/10*u.nm)
+
+      spec_normalized = spectrum / y_continuum_fitted
+      norm_fluxes.append(spec_normalized.flux)
+
+      if plot:
+        f, axes = plt.subplots(1, 2, figsize=(12, 4))
+        ax = axes[0]  
+        ax.plot(wavelengths[order]/10*u.nm, fluxes[order]*u.Jy, color='purple')  
+        ax.plot(wavelengths[order]/10*u.nm, y_continuum_fitted)  
+        ax.set_title("Continuum Fitting")
+
+        ax = axes[1]
+        ax.plot(spec_normalized.spectral_axis, spec_normalized.flux, color='purple')    
+        ax.set_title("Continuum normalized spectrum")    
+
+  return wavelengths.astype(np.float64), norm_fluxes        
+         
+
+      
+
+
 
 
 
