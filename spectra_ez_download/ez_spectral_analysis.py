@@ -7,6 +7,7 @@ import matplotlib.pylab as plt
 from specutils.spectra import Spectrum1D, SpectralRegion
 from specutils.fitting import fit_generic_continuum
 from astropy import units as u
+import astropy.constants as ac
 from astropy.modeling import models
 
 def spectra_read(path, flux_col = 1, wl_col = 4):
