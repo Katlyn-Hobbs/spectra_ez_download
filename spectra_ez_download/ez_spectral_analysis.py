@@ -121,6 +121,31 @@ def continuum_norm(path, plot=False, median_window=3, orders=None):
         f.tight_layout    
 
   return wavelengths.astype(np.float64), norm_fluxes        
+
+def BC_correction():
+    """
+    Apply a barycentric correction
+    
+      Apply a barycentric correction to wavlelength values based on Barycentric velocities read from .fits header.
+
+      Args:
+          none
+
+      Returns:
+          arrays: corrected wavelengths, flux
+    """
+    # load in wavelength and flux:
+    wavelength, flux = continuum_norm(path)
+    # load in BERV and BJD from header:
+    hdul = fits.open(path)
+    hdr = hdul[0].header
+    berv = hdr['*BERV'][0] # km/s
+    bjd = hdr['*BJD'][0] # Barycentric Julian date (TDB)
+
+    rv_corr = 1 + berv/ac.c # corrective value
+    wavelength_corrected = wavelength*rv_corr # angstroms
+
+    return wavelength_corrected, flux
          
 
       
