@@ -79,7 +79,7 @@ def continuum_norm(path, plot=False, median_window=3, orders=None):
       norm_fluxes.append(spec_normalized.flux)
 
       if plot:
-        f, axes = plt.subplots(1, 2, figsize=(12, 4))
+        f, axes = plt.subplots(2, 1, figsize=(12, 4))
         ax = axes[0]  
         ax.plot(wavelengths[order]/10*u.nm, fluxes[order]*u.Jy, color='purple')  
         ax.plot(wavelengths[order]/10*u.nm, y_continuum_fitted)  
@@ -99,7 +99,7 @@ def continuum_norm(path, plot=False, median_window=3, orders=None):
       norm_fluxes.append(spec_normalized.flux)
 
       if plot:
-        f, axes = plt.subplots(1, 2, figsize=(12, 4))
+        f, axes = plt.subplots(2, 1, figsize=(12, 4))
         ax = axes[0]  
         ax.plot(wavelengths[order]/10*u.nm, fluxes[order]*u.Jy, color='purple')  
         ax.plot(wavelengths[order]/10*u.nm, y_continuum_fitted)  
