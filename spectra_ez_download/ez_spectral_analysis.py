@@ -139,10 +139,7 @@ class ez_spectra_analysis(object):
         """
         Apply a barycentric correction
         
-          Apply a barycentric correction to wavlelength values based on Barycentric velocities read from .fits header.
-    
-          Args:
-              none
+          Apply a barycentric correction to wavlelength values based on Barycentric velocity and BJD values read from .fits header. Reads in flux and wavelength info from continuum_norm().
     
           Returns:
               arrays: corrected wavelengths, flux
