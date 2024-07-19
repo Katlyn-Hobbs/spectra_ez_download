@@ -140,7 +140,7 @@ class ez_spectral_analysis(object):
             ax.set_title("Continuum normalized spectrum")
             f.tight_layout()    
     
-      return used_wavelengths.astype(np.float64), norm_fluxes        
+      return used_wavelengths, norm_fluxes        
     
     def BC_correction(self):
         """
