@@ -88,7 +88,7 @@ class ez_spectral_analysis(object):
       wavelengths, fluxes = ez_spectral_analysis.spectra_read(self)
     
       norm_fluxes = []
-      
+      used_wavelengths = []
       if self.orders == None:
         for order in range(0, len(fluxes)):
           spectrum = Spectrum1D(flux=fluxes[order].astype(np.float64)*u.Jy, 
@@ -99,7 +99,7 @@ class ez_spectral_analysis(object):
     
           spec_normalized = spectrum / y_continuum_fitted
           norm_fluxes.append(spec_normalized.flux)
-    
+          used_wavelengths.append(wavelengths[order]) 
           if self.plot:
             f, axes = plt.subplots(2, 1, figsize=(12, 4))
             ax = axes[0]  
@@ -124,7 +124,7 @@ class ez_spectral_analysis(object):
     
           spec_normalized = spectrum / y_continuum_fitted
           norm_fluxes.append(spec_normalized.flux)
-    
+          used_wavelengths.append(wavelengths[order])  
           if self.plot:
             f, axes = plt.subplots(2, 1, figsize=(12, 4))
             ax = axes[0]  
@@ -140,7 +140,7 @@ class ez_spectral_analysis(object):
             ax.set_title("Continuum normalized spectrum")
             f.tight_layout()    
     
-      return wavelengths.astype(np.float64), norm_fluxes        
+      return used_wavelengths.astype(np.float64), norm_fluxes        
     
     def BC_correction(self):
         """
@@ -164,7 +164,7 @@ class ez_spectral_analysis(object):
 
         # iterate through all the orders and apply the same barycentric correction to the wavelengths    
         wavelength_corrected_list = []
-        for order in range(len(wavelength)):
+        for order in range(len(self.orders)):
             wavelength_corrected = wavelength[order]*rv_corr # angstroms
             wavelength_corrected_list.append(wavelength_corrected)
     
