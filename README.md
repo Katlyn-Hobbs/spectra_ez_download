@@ -1,6 +1,6 @@
 # analyze spectra, ez-style!
 
-A package to upload local HARPS-N spectra and run some simple analyses.
+A package to read in HARPS-N spectra and run some simple analyses.
 
 Installation:
 
