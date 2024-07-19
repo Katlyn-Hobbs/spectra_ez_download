@@ -8,6 +8,8 @@ Installation:
 
 2. `git clone https://github.com/Katlyn-Hobbs/spectra_ez_download.git`
 
+3. Navigate towards `spectra_ez_download/spectra_ez_download` and open the `demo.ipynb` notebook
+
 
 
 
