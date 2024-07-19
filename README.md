@@ -1,6 +1,6 @@
-# analyze spectra! easy-style
+# analyze spectra, ez-style!
 
-A simple function to upload local HARPS-N spectra and run some simple analyses.
+A package to upload local HARPS-N spectra and run some simple analyses.
 
 Installation:
 
