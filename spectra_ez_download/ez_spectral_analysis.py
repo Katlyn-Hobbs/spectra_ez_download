@@ -59,7 +59,7 @@ class ez_spectral_analysis(object):
         Create a figure for the raw spectra for the specified wavelength orders. If orders are not specified, 
         the default behavior is to plot orders 16, 17, 18.
         """
-        wavelengths, fluxes = ez_spectral_analysis.spectra_read()
+        wavelengths, fluxes = ez_spectral_analysis.spectra_read(self)
     
         fig, axes = plt.subplots(len(self.orders), 1,figsize=(9, len(self.orders)*2))
         for index in range(0, len(self.orders)):
@@ -85,7 +85,7 @@ class ez_spectral_analysis(object):
             arrays: wavelength array, normalized flux array
       """
     
-      wavelengths, fluxes = ez_spectral_analysis.spectra_read()
+      wavelengths, fluxes = ez_spectral_analysis.spectra_read(self)
     
       norm_fluxes = []
       
@@ -152,7 +152,7 @@ class ez_spectral_analysis(object):
               arrays: corrected wavelengths, flux
         """
         # load in wavelength and flux:
-        wavelength, flux = ez_spectral_analysis.continuum_norm()
+        wavelength, flux = ez_spectral_analysis.continuum_norm(self)
         # load in BERV and BJD from header:
         hdul = fits.open(self.path)
         hdr = hdul[0].header
@@ -175,7 +175,7 @@ class ez_spectral_analysis(object):
           Returns:
               arrays: wavelengths, interpolated flux
         """
-        berv_wl, berv_flux = ez_spectral_analysis.BC_correction()
+        berv_wl, berv_flux = ez_spectral_analysis.BC_correction(self)
         hdul = fits.open(template)
 
         wavelength_template = hdul[self.wl_col].data
