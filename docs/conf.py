@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.abspath('../spectra_ez_download'))
 project = 'spectra_ez_download'
 copyright = '2024, Kate Hobbs, Zoë de Beurs, Nina Brown'
 author = 'Kate Hobbs, Zoe de Beurs, Nina Brown'
-release = '0.0.1'
+release = '0.1.4'
 rood_cov = 'index'
 
 # -- General configuration ---------------------------------------------------
