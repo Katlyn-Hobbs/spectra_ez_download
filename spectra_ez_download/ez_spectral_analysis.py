@@ -157,12 +157,18 @@ class ez_spectral_analysis(object):
         hdul = fits.open(self.path)
         hdr = hdul[0].header
         berv = hdr['*BERV'][0] # km/s
+        berv_ms = berv*1000
         bjd = hdr['*BJD'][0] # Barycentric Julian date (TDB)
+
+        rv_corr = 1 + berv_ms/ac.c.value # corrective value
+
+        # iterate through all the orders and apply the same barycentric correction to the wavelengths    
+        wavelength_corrected_list = []
+        for order in range(len(wavelength)):
+            wavelength_corrected = wavelength[order]*rv_corr # angstroms
+            wavelength_corrected_list.append(wavelength_corrected)
     
-        rv_corr = 1 + berv/ac.c # corrective value
-        wavelength_corrected = wavelength*rv_corr # angstroms
-    
-        return wavelength_corrected, flux
+        return wavelength_corrected_list, flux
 
     def interpolation(self, template):   
         """
