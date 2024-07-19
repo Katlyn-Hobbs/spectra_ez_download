@@ -1,22 +1,9 @@
-# analyze spectra!
+# analyze spectra! easy-style
 
-tasks:
-1. write function that does the continuum normalization correction - zoe [DONE]
-   
-   a. input (filepath, wavelength_for_all_orders, flux_for_all_orders)
-   
-   b. output (wavelength_for_all_orders, normalized_flux_for_all_orders)
+A simple function to upload local HARPS-N spectra and run some simple analyses.
 
-3. write function that performs barycentric correction for all spectral orders - nina
+Installation:
 
-   a. input(wavelength, flux, date/time, BERV from fits header)
+1. 'pip install spectra-ez-download==0.1.4'
 
-   b. output(wavelength, flux)
-
-5. Wavelength interpolation function - kate
-
-   a. input(template, flux)
-
-6. write function that computes weighted daily average - kate
-
-7. write a simple plotting function - all
+2. 'git clone https://github.com/Katlyn-Hobbs/spectra_ez_download.git'
